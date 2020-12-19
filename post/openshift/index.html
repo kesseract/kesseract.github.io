@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.79.0" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="What is OpenShift?">
+	
+	
+	<meta name="author" content="Sumit Shatwara"><meta name="keywords" content="openshift,redhat,Openshift container platform,kubernetes"><meta name="description" content="Introduction to OpenShift"><meta property="og:title" content="What is OpenShift?" />
+<meta property="og:description" content="Introduction to OpenShift" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://kesseract.github.io/post/openshift/" />
+<meta property="article:published_time" content="2020-12-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-12-18T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="What is OpenShift?"/>
+<meta name="twitter:description" content="Introduction to OpenShift"/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<link rel="stylesheet" href="/css/katex.min.css" crossorigin="anonymous">
+	<script defer src="/js/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+	<script defer src="/js/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script><title>What is OpenShift? | Kesseract</title></head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://kesseract.github.io/">Kesseract</a></h2></div>
+	<div id="title-description"><p id="subtitle">Personal Blog of <a href="https://www.linkedin.com/in/sumitshatwara/">Sumit Shatwara</a>. Opinions mentioned here are personal and not of my employer.</p><div id="social">
+			<nav>
+				<ul>
+					<li><a href="https://github.com/kesseract"><i title="Github" class="icons fab fa-github"></i></a></li>
+					<li><a href="https://www.linkedin.com/in/sumitshatwara/"><i title="Linkedin" class="icons fab fa-linkedin"></i></a></li>
+					<li><a href="https://www.twitter.com/sumitshatwara/"><i title="Twitter" class="icons fab fa-twitter"></i></a></li><li><a href="mailto:sumitshatwara@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li>
+					<li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
+			</nav>
+		</div>
+	</div>
+	
+	<div id="mainmenu">
+		<nav>
+			<ul>
+				
+				<li><a href="/">Home</a></li>
+				
+				<li><a href="/post">All Posts</a></li>
+				
+				<li><a href="/about">About</a></li>
+				
+				<li><a href="/tags">Tags</a></li>
+				
+				<li><a href="/categories">Categories</a></li>
+				
+			</ul>
+		</nav>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	
+		<p>
+		
+		Written by Sumit Shatwara
+		
+		</p>
+	
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">18</span>
+				<span class="rest">Dec 2020</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">What is OpenShift?</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<p><strong>OpenShift</strong> is a family of cloud-native and containerization software products developed by Red Hat. It’s core product is the <strong>OpenShift Container Platform</strong> and other products provide this platform through different models: <strong>OKD</strong> is a community-driven upstream, <strong>OpenShift Online</strong> is the platform as a public cloud offering, <strong>OpenShift Kubernetes Engine</strong> which is an enterprise Kubernetes platform providing a subset of features of OpenShift Container Platform, <strong>OpenShift Dedicated</strong> is the platform offered as managed services on top of Public clouds (like AWS and GCP), <strong>Azure Red Hat OpenShift</strong> is the fully managed offering supported jointly by Red Hat and Microsoft, a fully managed platform offerings like <strong>Red Hat OpenShift on IBM Cloud</strong> &amp; <strong>Red Hat OpenShift Service on AWS</strong>. I have written about the core product called OpenShift Container Platform in this article.</p>
+<p>OpenShift Container Platform has got a long history with Red Hat since it was <strong>announced in <strong>May 2011</strong></strong>. It originated from <strong>Red Hat’s acquisition of Makara</strong> - an organization offering proprietary Platform-as-a-Service solution based on Linux containers. In OpenShift version 2 up until 2014, technologies like container, container image and container orchestration used custom developed technologies like <strong>Gears, Cartridges and Broker Host</strong> respectively. This got changed totally in OpenShift version 3 with the adoption of <strong>Docker</strong> as the container runtime and <strong>Kubernetes</strong> as the container orchestration technology. OpenShift version 4 has many architectural changes where <strong>CRI-O</strong> replaced Docker as the container runtime, <strong>Red Hat Enterprise Linux CoreOS</strong> replaced RHEL as the default Operating System for compute nodes and only operating system for control plane nodes, and Operators for building, packaging and deploying OpenShift cluster. It improves the security and manageability aspects of OpenShift cluster further.</p>
+<p><figure>
+  <img src="https://www.openshift.com/hubfs/images/illustrations/openshift-container-platform-stack_desktop.svg" alt="enter image description here"  />
+</figure></p>
+<p><em>Image Source: [https://www.openshift.com/learn/what-is-openshift]</em></p>
+<p><strong>OpenShift 4</strong> is the culmination of Red Hat’s continued investment in the platform since 2011 and also in <strong>Kubernetes</strong> since 2015. This release has been focused to solve the most difficult problems to build, integrate and run complex applications on top of Kubernetes platform across all footprints i.e. public cloud, private cloud, physical servers, virtual machines as well as edge computing servers. At the heart of OpenShift Container Platform is a harderned and trusted Kubernetes, which is all built on top of enterprise-proven Red Hat Enterprise Linux (RHEL). For OpenShift 4, the platform boundary is extended beyond just managing application workloads. It now provides full stack automated management of the Kubernetes and the underlying container host OS, RHEL CoreOS. Operating system doesn&rsquo;t need to be managed separately from the container platform. Instead, everything is installed, updated, and managed right from OpenShift itself.</p>
+<p>In cluster services, day-2 operations are automated with the help of kubernetes <strong>Operators</strong> pattern. Here, Operators are the differentiating factor in how OpenShift is built, packaged and deployed since it is widely adopted in all the layers to manage the lifecycle of cluster services as well as the platform services. It has got an amazing capability called <strong>Over the air (OTA) updates</strong> which any platform admin would love to have. You can just subscribe to the update channel and within a few clicks OpenShift can be updated seamlessly. It also consists of pre-installed <strong>cluster monitoring</strong> stack (based on Prometheus &amp; Grafana upstream projects), build-in private <strong>container registry</strong>, <strong>networking services</strong> (DNS based on CoreDNS, Software-defined Networking based on options like Open vSwitch and OVN-Kubernetes, HAProxy-based Ingress Controllers), <strong>Virtualization</strong> solution (based on KubeVirt upstream project), and support for <strong>Helm 3</strong>.</p>
+<p>On top of Kubernetes and the core platform cluster services are three main areas of the product. These include below core services of platform:</p>
+<ul>
+<li>
+<p><strong>Platform Services</strong>: It offers many of the modern cloud native features to the
+platform for managing different kinds of workloads. These features
+tie your workloads into the unique capabilities that platform
+provides. That include things like a Service Mesh (based on Istio
+upstream project), Pipelines (based on Tekton upstream project), Serverless
+capabilities (based on Knative upstream project), Chargeback (as a SaaS), the full stack
+logging (based on Elasticsearch, Fluentd and Kibana stack) and Builds
+(Source-to-Image framework and Shipwright upstream project).</p>
+</li>
+<li>
+<p><strong>Application Services</strong>: It provides capabilities for building, integrating and
+running cloud-native applications. This consists of databases,
+languages, runtimes, integration, and 100’s of certified ISV
+services.</p>
+</li>
+<li>
+<p><strong>Developer Services</strong>: It is targeted at improving developer
+productivity. OpenShift has got everything out of box which is
+required by developers to innovate. It consists of developer tools
+like Developer Console, Developer CLI, Code Ready Workspace
+(OpenShift and Kubernetes-native IDE), Code Ready Container
+(standalone OpenShift setup for laptops), IDE plugins and VS Code
+Extension.</p>
+</li>
+</ul>
+<p>I will write about each of these services in detail with a series of upcoming blogs. Stay tuned!</p>
+<p>I would like to have your suggestion of topics on what I should write in my upcoming blogs.</p>
+<p>Thanks for reading!</p>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			<a href="/categories/openshift/"> openshift </a>
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			<a href="/tags/kubernetes/"> kubernetes </a>
+			
+			
+			
+			
+			
+			<a href="/tags/openshift/"> openshift </a>
+			
+			
+			
+			
+			
+			<a href="/tags/openshift-container-platform/"> openshift-container-platform </a>
+			
+			
+			
+			
+			
+			<a href="/tags/redhat/"> redhat </a>
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+	(function() {
+	    
+	    
+	    if (window.location.hostname == "localhost")
+	        return;
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    var disqus_shortname = 'disqus';
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to load the comments.</noscript>
+
+
+</div>
+
+  </main>
+<footer>
+	 © Copyright notice | <a href="https://github.com/kesseract">Sumit Shatwara</a> 
+	
+	
+	
+</footer>
+
+
+</body>
+</html>
