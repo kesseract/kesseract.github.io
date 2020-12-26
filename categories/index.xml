@@ -7,10 +7,46 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>© Copyright notice | Sumit Shatwara</copyright>
-		<lastBuildDate>Fri, 18 Dec 2020 00:00:00 +0000</lastBuildDate>
+		<lastBuildDate>Fri, 25 Dec 2020 00:00:00 +0000</lastBuildDate>
 		
 		<atom:link href="http://kesseract.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Grafana</title>
+			<link>http://kesseract.github.io/categories/grafana/</link>
+			<pubDate>Fri, 25 Dec 2020 00:00:00 +0000</pubDate>
+			
+			<guid>http://kesseract.github.io/categories/grafana/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>monitoring</title>
+			<link>http://kesseract.github.io/categories/monitoring/</link>
+			<pubDate>Fri, 25 Dec 2020 00:00:00 +0000</pubDate>
+			
+			<guid>http://kesseract.github.io/categories/monitoring/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>Prometheus</title>
+			<link>http://kesseract.github.io/categories/prometheus/</link>
+			<pubDate>Fri, 25 Dec 2020 00:00:00 +0000</pubDate>
+			
+			<guid>http://kesseract.github.io/categories/prometheus/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
 		<item>
 			<title>openshift</title>
 			<link>http://kesseract.github.io/categories/openshift/</link>

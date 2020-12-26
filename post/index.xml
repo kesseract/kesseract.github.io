@@ -7,10 +7,22 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>© Copyright notice | Sumit Shatwara</copyright>
-		<lastBuildDate>Fri, 18 Dec 2020 00:00:00 +0000</lastBuildDate>
+		<lastBuildDate>Fri, 25 Dec 2020 00:00:00 +0000</lastBuildDate>
 		
 		<atom:link href="http://kesseract.github.io/post/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Monitoring FIO QoS parameters using Prometheus Grok Exporter, InfluxDB and Grafana</title>
+			<link>http://kesseract.github.io/post/fio/</link>
+			<pubDate>Fri, 25 Dec 2020 00:00:00 +0000</pubDate>
+			
+			<guid>http://kesseract.github.io/post/fio/</guid>
+			<description>
+				
+				Implement performance-monitoring process for Flexible IO tester (FIO) at client servers using Prometheus and visualize the time-series metrics of QoS parameters (IOPS, Latency and Bandwidth) from FIO output generated on real-time basis, using Grafana dashboard
+				
+			</description>
+		</item>
 		<item>
 			<title>What is OpenShift?</title>
 			<link>http://kesseract.github.io/post/openshift/</link>
