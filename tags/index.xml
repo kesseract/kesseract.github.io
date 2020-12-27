@@ -7,10 +7,94 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>© Copyright notice | Sumit Shatwara</copyright>
-		<lastBuildDate>Fri, 25 Dec 2020 00:00:00 +0000</lastBuildDate>
+		<lastBuildDate>Sun, 27 Dec 2020 00:00:00 +0000</lastBuildDate>
 		
 		<atom:link href="http://kesseract.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>grpc</title>
+			<link>http://kesseract.github.io/tags/grpc/</link>
+			<pubDate>Sun, 27 Dec 2020 00:00:00 +0000</pubDate>
+			
+			<guid>http://kesseract.github.io/tags/grpc/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>http2</title>
+			<link>http://kesseract.github.io/tags/http2/</link>
+			<pubDate>Sun, 27 Dec 2020 00:00:00 +0000</pubDate>
+			
+			<guid>http://kesseract.github.io/tags/http2/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>ingress</title>
+			<link>http://kesseract.github.io/tags/ingress/</link>
+			<pubDate>Sun, 27 Dec 2020 00:00:00 +0000</pubDate>
+			
+			<guid>http://kesseract.github.io/tags/ingress/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>ingress-controller</title>
+			<link>http://kesseract.github.io/tags/ingress-controller/</link>
+			<pubDate>Sun, 27 Dec 2020 00:00:00 +0000</pubDate>
+			
+			<guid>http://kesseract.github.io/tags/ingress-controller/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>kubernetes</title>
+			<link>http://kesseract.github.io/tags/kubernetes/</link>
+			<pubDate>Sun, 27 Dec 2020 00:00:00 +0000</pubDate>
+			
+			<guid>http://kesseract.github.io/tags/kubernetes/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>openshift</title>
+			<link>http://kesseract.github.io/tags/openshift/</link>
+			<pubDate>Sun, 27 Dec 2020 00:00:00 +0000</pubDate>
+			
+			<guid>http://kesseract.github.io/tags/openshift/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>routes</title>
+			<link>http://kesseract.github.io/tags/routes/</link>
+			<pubDate>Sun, 27 Dec 2020 00:00:00 +0000</pubDate>
+			
+			<guid>http://kesseract.github.io/tags/routes/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
 		<item>
 			<title>FIO</title>
 			<link>http://kesseract.github.io/tags/fio/</link>
@@ -65,30 +149,6 @@
 			<pubDate>Fri, 25 Dec 2020 00:00:00 +0000</pubDate>
 			
 			<guid>http://kesseract.github.io/tags/prometheus/</guid>
-			<description>
-				
-				
-				
-			</description>
-		</item>
-		<item>
-			<title>kubernetes</title>
-			<link>http://kesseract.github.io/tags/kubernetes/</link>
-			<pubDate>Fri, 18 Dec 2020 00:00:00 +0000</pubDate>
-			
-			<guid>http://kesseract.github.io/tags/kubernetes/</guid>
-			<description>
-				
-				
-				
-			</description>
-		</item>
-		<item>
-			<title>openshift</title>
-			<link>http://kesseract.github.io/tags/openshift/</link>
-			<pubDate>Fri, 18 Dec 2020 00:00:00 +0000</pubDate>
-			
-			<guid>http://kesseract.github.io/tags/openshift/</guid>
 			<description>
 				
 				

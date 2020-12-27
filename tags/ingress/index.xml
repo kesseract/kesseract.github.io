@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
-		<title>openshift on Kesseract</title>
-		<link>http://kesseract.github.io/categories/openshift/</link>
-		<description>Recent content in openshift on kesseract.github.io</description>
+		<title>ingress on Kesseract</title>
+		<link>http://kesseract.github.io/tags/ingress/</link>
+		<description>Recent content in ingress on kesseract.github.io</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>© Copyright notice | Sumit Shatwara</copyright>
 		<lastBuildDate>Sun, 27 Dec 2020 00:00:00 +0000</lastBuildDate>
 		
-		<atom:link href="http://kesseract.github.io/categories/openshift/index.xml" rel="self" type="application/rss+xml" />
+		<atom:link href="http://kesseract.github.io/tags/ingress/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
 			<title>gRPC or HTTP/2 Ingress Connectivity in OpenShift Container Platform</title>
@@ -20,18 +20,6 @@
 			<description>
 				
 				Technical Overview on HTTP/2 Ingress Connectivity in OpenShift and Sample Python gRPC application testing in OpenShift with steps
-				
-			</description>
-		</item>
-		<item>
-			<title>What is OpenShift?</title>
-			<link>http://kesseract.github.io/post/openshift/</link>
-			<pubDate>Fri, 18 Dec 2020 00:00:00 +0000</pubDate>
-			
-			<guid>http://kesseract.github.io/post/openshift/</guid>
-			<description>
-				
-				Introduction and History of OpenShift followed by Overview of the enterprise Kubernetes distribution called Red Hat OpenShift Container Platform
 				
 			</description>
 		</item>

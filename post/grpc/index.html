@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.79.0" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="gRPC or HTTP/2 Ingress Connectivity in OpenShift Container Platform">
+	
+	
+	<meta name="author" content="Sumit Shatwara"><meta name="keywords" content="openshift,http2,grpc,kubernetes,ingress,ingress-controller,routes"><meta name="description" content="Technical Overview on HTTP/2 Ingress Connectivity in OpenShift and Sample Python gRPC application testing in OpenShift with steps"><meta property="og:title" content="gRPC or HTTP/2 Ingress Connectivity in OpenShift Container Platform" />
+<meta property="og:description" content="Technical Overview on HTTP/2 Ingress Connectivity in OpenShift and Sample Python gRPC application testing in OpenShift with steps" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://kesseract.github.io/post/grpc/" />
+<meta property="article:published_time" content="2020-12-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-12-27T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="gRPC or HTTP/2 Ingress Connectivity in OpenShift Container Platform"/>
+<meta name="twitter:description" content="Technical Overview on HTTP/2 Ingress Connectivity in OpenShift and Sample Python gRPC application testing in OpenShift with steps"/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<link rel="stylesheet" href="/css/katex.min.css" crossorigin="anonymous">
+	<script defer src="/js/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+	<script defer src="/js/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script><title>gRPC or HTTP/2 Ingress Connectivity in OpenShift Container Platform | Kesseract</title></head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="http://kesseract.github.io/">Kesseract</a></h2></div>
+	<div id="title-description"><p id="subtitle">Personal Blog of <a href="https://www.linkedin.com/in/sumitshatwara/">Sumit Shatwara</a>. Opinions mentioned here are personal and not of my employer.</p><div id="social">
+			<nav>
+				<ul>
+					<li><a href="https://github.com/kesseract"><i title="Github" class="icons fab fa-github"></i></a></li>
+					<li><a href="https://www.linkedin.com/in/sumitshatwara/"><i title="Linkedin" class="icons fab fa-linkedin"></i></a></li>
+					<li><a href="https://www.twitter.com/sumitshatwara/"><i title="Twitter" class="icons fab fa-twitter"></i></a></li><li><a href="mailto:sumitshatwara@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li>
+					<li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
+			</nav>
+		</div>
+	</div>
+	
+	<div id="mainmenu">
+		<nav>
+			<ul>
+				
+				<li><a href="/">Home</a></li>
+				
+				<li><a href="/post">All Posts</a></li>
+				
+				<li><a href="/about">About</a></li>
+				
+				<li><a href="/tags">Tags</a></li>
+				
+				<li><a href="/categories">Categories</a></li>
+				
+			</ul>
+		</nav>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	
+		<p>
+		
+		Written by Sumit Shatwara
+		
+		</p>
+	
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">27</span>
+				<span class="rest">Dec 2020</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">gRPC or HTTP/2 Ingress Connectivity in OpenShift Container Platform</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<h1 id="technical-overview">Technical Overview</h1>
+<p>The default Ingress Controller in OpenShift Container Platform 4.x is based on HAProxy. If you aren’t familiar with HAProxy, it is free, open source software that provides a high available load balancer and proxy server for TCP and HTTP-based applications that distributes requests across multiple servers.</p>
+<p>In the upstream HAProxy community project, Native HTTP Representation (HTX) engine was added in HAProxy 1.9 release in late 2018 which was developed to enhance the capability of HAProxy to parse and modify the HTTP messages. In HTX mode, HAProxy is able to more easily manipulate any representation of the HTTP protocol. This allows users to use end-to-end HTTP/2 connectivity as well as use newer versions of HTTP-based technologies and protocols at a rapid pace. With the release of version 1.9.2, HAProxy now fully supports gRPC traffic. The gRPC protocol allows your application services to communicate with very low latency. HAProxy supports it with enabling bidirectional streaming of data, parsing and inspecting HTTP headers, and logging gRPC traffic.</p>
+<p>OpenShift Container Platform 4.5 or later now provides end-to-end proxying of HTTP/2 traffic with the help of HAProxy which is the default Ingress Controller in cluster. You can create gRPC enabled routes to secure and route gRPC traffic over HTTP/2. This capability allows application developers and teams to leverage HTTP/2 protocol functionalities, including single connection, header compression, binary streams, and more.</p>
+<p>HTTP/2 connectivity can be enabled for an individual Ingress Controller (default is HAProxy) in OpenShift or for the entire OpenShift cluster. To enable the use of HTTP/2 for the connection from the client to HAProxy, an OpenShift route must specify a custom certificate that needs to be generated using OpenSSL or procured from a trusted certificate authority. A route that uses the default certificate cannot use HTTP/2 connectivity. This restriction is essential to remove issues from connection coalescing, where the client re-uses a connection for different routes that use the same certificate.</p>
+<p>The connection from HAProxy to the application pod can use HTTP/2 only for re-encrypt or passthrough routes and not for edge-terminated or insecure routes. This restriction is due to use of TLS extension called Application-Level Protocol Negotiation (ALPN) by HAProxy, to negotiate the use of HTTP/2 between HAProxy itself and the back-end application service. This implies that end-to-end HTTP/2 connectivity can only be possible with passthrough and re-encrypt routes and not with insecure or edge-terminated routes.</p>
+<p>Let me describe the reason for this restriction further if you are not aware of ALPN. When using TLS with HTTP/1.1 protocol, the convention is to listen on port 443 by default. Coming up with different ports other than 443 for HTTP/2 would only make things complex and sticking with the same port was the final decision. However, there was a need to define which version of HTTP protocol the server and client would communicate. It was obvious that there could have been an entirely separate handshake that negotiated the protocol for the communication, but in the end it made more sense to encode this information into the TLS handshake process, saving a whole round-trip and improving the latency. The Application-Layer Protocol Negotiation (ALPN) extension was developed to update TLS to support a client and server negotiating the application protocol over a secure connection. It was developed to enable the support for HTTP/2 primarily, but it can be leveraged for any other application protocols that might need to be negotiated to solve a different problem in the future.</p>
+<h2 id="known-limitation">Known Limitation</h2>
+<p>For re-encrypt routes, the Ingress Controller negotiates its connection to the application independently of the connection from the client. This means a client may connect to the HAProxy Ingress Controller and negotiate HTTP/1.1, and the Ingress Controller may then connect to the application service, negotiate HTTP/2, and forward the request from the client HTTP/1.1 connection using the HTTP/2 connection to the application. This poses a problem if the client subsequently tries to upgrade its connection from HTTP/1.1 to the WebSocket protocol, because the Ingress Controller cannot forward WebSocket to HTTP/2 and cannot upgrade its HTTP/2 connection to WebSocket. Consequently, if you have an application that is intended to accept WebSocket connections, it must not allow negotiating the HTTP/2 protocol or else clients will fail to upgrade to the WebSocket protocol.</p>
+<p>There is already a reported issue for this limitation in HAProxy GitHub repo. You can further track this issue if it’s really a blocker for you and you want to check the progress for it’s fix: <a href="https://github.com/haproxy/haproxy/issues/162" target="_blank">GitHub Issue</a></p>
+<h1 id="sample-python-grpc-application-testing-in-openshift">Sample Python gRPC application testing in OpenShift</h1>
+<ol>
+<li>
+<p>As a prerequisites, you have an OpenShift Container Platform 4.5 or later up and running with the bastion node with RHEL operating system. You also have installed Go Lang and gRPCurl tool kits in the bastion node.</p>
+</li>
+<li>
+<p>Enable HTTP/2 on a single Ingress Controller. To enable HTTP/2 on an Ingress Controller, enter the oc annotate command:</p>
+</li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+$  oc -n openshift-ingress-operator annotate ingresscontrollers/&lt;ingresscontroller_name&gt; ingress.operator.openshift.io/default-enable-http2=true
+
+</code></pre></div><ul>
+<li>Replace &lt;ingresscontroller_name&gt; with the name of the Ingress Controller to annotate.</li>
+</ul>
+<ol start="3">
+<li>If you want to enable HTTP/2 on the entire cluster, you can skip step 2. To enable HTTP/2 for the entire cluster, enter the oc annotate command:</li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+$  oc annotate ingresses.config/cluster ingress.operator.openshift.io/default-enable-http2=true
+
+</code></pre></div><ol start="4">
+<li>Git clone the sample gRPC Python application using below command:</li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+$ git clone https://github.com/kesseract/ssl_grpc_example.git
+
+$ cd ssl_grpc_example/
+
+</code></pre></div><ol start="5">
+<li>Generate certificate for the server using below command:</li>
+</ol>
+<p><code>make gen_key</code></p>
+<p>It uses OpenSSL to generate the certificate. For the CN record, use the *.apps.apps.&lt;cluster_name&gt;.&lt;base_domain&gt; wildcard hostname for OpenShift. You can get this hostname using below command:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+$ oc get ingresses.config/cluster -o jsonpath=&#39;{.spec.domain}&#39;
+
+Example output: apps.cluster-d3f6.d3f6.example.opentlc.com
+
+</code></pre></div><ol start="6">
+<li>
+<p>Copy the generated certificate with name “tls.crt” and key with name “tls.key” in the empty folder called “tls”.</p>
+</li>
+<li>
+<p>Create Server by deploying the gRPC Python application in OpenShift cluster in any project. You can either build the image using S2I or deploy a prebuilt image from quay.io using below commands:</p>
+</li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+$ oc new-app https://github.com/tsailiming/ssl_grpc_example --name=grpc
+
+$ oc new-app --docker-image=quay.io/ltsai/python-grpc-demo --name=grpc
+
+</code></pre></div><ol start="8">
+<li>Now secure this application with Passthrough Routes. It offers a secure alternative to re-encrypt routes because the application exposes it’s TLS certificate. With this, the traffic is encrypted between the client and the backend application service. To create a passthrough route, you need a certificate (which you already generated in step 5) and an URL for your application to access it. The recommended way to accomplish this is by using OpenShift TLS secrets. Secrets are exposed via a volume mount point into a container. Below are commands to complete all these configurations:</li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+$ oc create secret tls tls-secret --cert=tls/tls.crt --key=tls/tls.key
+
+$ oc set volume deployment/grpc --name=tls-secret --type=secret --secret-name=tls-secret --mount-path=/opt/app-root/src/tls --add
+
+$ oc create route passthrough grpc --service=grpc
+
+</code></pre></div><ol start="9">
+<li>Run the client using <a href="https://github.com/fullstorydev/grpcurl" target="_blank">gRPCurl</a>.</li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">
+$ HOSTNAME=`oc get route grpc -o jsonpath=&#39;{.spec.host}&#39;`
+
+$ grpcurl -import-path . -proto service.proto -insecure -cert tls/tls.crt -key tls/tls.key $HOSTNAME:443 Server.Foo
+
+{
+
+&#34;message&#34;: &#34;Hello! Current time is Thu Sep 24 14:47:30 2020&#34;
+
+}
+
+</code></pre></div><p>If you can see the message similar to the above output, then you have successfully tested the HTTP/2 connectivity in OpenShift Container Platform.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.openshift.com/container-platform/4.6/networking/ingress-operator.html#nw-http2-haproxy_configuring-ingress" target="_blank">Enabling HTTP/2 Ingress connectivity in
+OpenShift</a></li>
+<li><a href="https://docs.openshift.com/container-platform/3.11/architecture/networking/routes.html#secured-routes" target="_blank">Passthrough Routes in
+OpenShift</a></li>
+</ul>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/categories/openshift/"> openshift </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/grpc/"> grpc </a>
+			
+			
+			
+			
+			
+			<a href="/tags/http2/"> http2 </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/ingress/"> ingress </a>
+			
+			
+			
+			
+			
+			<a href="/tags/ingress-controller/"> ingress-controller </a>
+			
+			
+			
+			
+			
+			<a href="/tags/kubernetes/"> kubernetes </a>
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/openshift/"> openshift </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/routes/"> routes </a>
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+	(function() {
+	    
+	    
+	    if (window.location.hostname == "localhost")
+	        return;
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    var disqus_shortname = 'disqus';
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to load the comments.</noscript>
+
+
+</div>
+
+  </main>
+<footer>
+	 © Copyright notice | <a href="https://github.com/kesseract">Sumit Shatwara</a> 
+	
+	
+	
+</footer>
+
+
+</body>
+</html>

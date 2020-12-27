@@ -7,10 +7,22 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<copyright>© Copyright notice | Sumit Shatwara</copyright>
-		<lastBuildDate>Fri, 18 Dec 2020 00:00:00 +0000</lastBuildDate>
+		<lastBuildDate>Sun, 27 Dec 2020 00:00:00 +0000</lastBuildDate>
 		
 		<atom:link href="http://kesseract.github.io/tags/openshift/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>gRPC or HTTP/2 Ingress Connectivity in OpenShift Container Platform</title>
+			<link>http://kesseract.github.io/post/grpc/</link>
+			<pubDate>Sun, 27 Dec 2020 00:00:00 +0000</pubDate>
+			
+			<guid>http://kesseract.github.io/post/grpc/</guid>
+			<description>
+				
+				Technical Overview on HTTP/2 Ingress Connectivity in OpenShift and Sample Python gRPC application testing in OpenShift with steps
+				
+			</description>
+		</item>
 		<item>
 			<title>What is OpenShift?</title>
 			<link>http://kesseract.github.io/post/openshift/</link>
@@ -19,7 +31,7 @@
 			<guid>http://kesseract.github.io/post/openshift/</guid>
 			<description>
 				
-				Introduction to OpenShift
+				Introduction and History of OpenShift followed by Overview of the enterprise Kubernetes distribution called Red Hat OpenShift Container Platform
 				
 			</description>
 		</item>
