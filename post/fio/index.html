@@ -101,7 +101,7 @@
 <h2 id="technical-overview">Technical Overview</h2>
 <p>Flexible IO tester (FIO) is an open-source synthetic benchmark tool. FIO can generate various IO workloads: sequential reads or random writes, synchronous or asynchronous, all based on the options provided by the user. FIO is the easiest and versatile tool to quickly perform IO performance tests on storage system, and allows you to simulate different types of IO loads.</p>
 <p><figure>
-  <img src="https://linkpicture.com/q/Overview.png" alt="image"  />
+  <img src="https://i.ibb.co/2MwyQTx/Overview.png" alt="image"  />
 </figure></p>
 <p>Prometheus is an open source monitoring solution that stores all its data in a time series database. Prometheus has a multi-dimensional data-model and a powerful query language that is used to generate reports of the resources being monitored. Grafana allows you to query, visualize, alert on and understand your metrics no matter where they are stored. <a href="https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html" target="_blank">Grok</a> is a tool to parse crappy unstructured log data into something structured and queryable to Prometheus server.</p>
 <p>FIO tool generates an unstructured output that is not recognized by Prometheus. That is where Grok-exporter appears, which will the help fetching the required QoS parameters (IOPS, Latency and Bandwidth), and transform them into metric name and key/value pairs. Once the data is queryable to Prometheus and it can be visualized with the help of Grafana dashboard.</p>
@@ -231,19 +231,19 @@ the observed values.</li>
 <li>Launch Grafana using <code>http://&lt;IP of Machine&gt;:3000</code> url address. Login using valid credentials. Add Prometheus server as a Data Source in Grafana. See the sample screenshot below:</li>
 </ol>
 <p><figure>
-  <img src="https://linkpicture.com/q/Step-7_1.png" alt="image"  />
+  <img src="https://i.ibb.co/tHzh1Ms/Step-7.png" alt="image"  />
 </figure></p>
 <ol start="8">
 <li>Create a dashboard in Grafana and add a graph for QoS parameter i.e IOPS, Bandwidth or Latency in the dashboard. Add PromQL queries in the graph with the valid metrics name i.e. iops_randwrite as defined in above grok-exporter config.yml file. See the sample screenshot below:</li>
 </ol>
 <p><figure>
-  <img src="https://linkpicture.com/q/Step-8.png" alt="image"  />
+  <img src="https://i.ibb.co/nQxRGhS/Step-8.png" alt="image"  />
 </figure></p>
 <ol start="9">
 <li>Adjust the ‘Refresh’ with value 1 second or 5 seconds, and there you go seeing the graph in the dashboard with the time-series values of QoS parameters i.e. IOPS, Bandwidth or Latency which is being generated from FIO output on a real-time basis. You might want to adjust the status-interval and runtime parameters of FIO command to observe the time-series values as per your required duration. See the sample screenshot below:</li>
 </ol>
 <p><figure>
-  <img src="https://linkpicture.com/q/Step-9.png" alt="image"  />
+  <img src="https://i.ibb.co/QdfgFsb/Step-9.png" alt="image"  />
 </figure></p>
 <h2 id="steps-involved-to-configure-influxdb-as-a-primary-storage-for-prometheus-metrics">Steps involved to configure InfluxDB as a primary storage for Prometheus metrics</h2>
 <p>Since Prometheus has a limit of storing metrics of 15 days only, next steps is to integrate Prometheus server with passive time-series database InfluxDB so that historical metrics data, which are older than 15 days, can be visualized using Grafana dashboards. Steps for the same as follows:</p>
@@ -287,19 +287,19 @@ remote_read:
 <li>Launch Grafana using <code>http://&lt;IP of Machine&gt;:3000</code> url address. Login using valid credentials. Add InfluxDB database as a Data Source in Grafana. See the sample screenshot below:</li>
 </ol>
 <p><figure>
-  <img src="https://linkpicture.com/q/Influx-step-5.png" alt="image"  />
+  <img src="https://i.ibb.co/6sP38Kg/Influx-step-5.png" alt="image"  />
 </figure></p>
 <ol start="6">
 <li>Create a dashboard in Grafana and add a graph for QoS parameter i.e IOPS, Bandwidth or Latency in the dashboard. Add InfluxSQL queries in the graph with the valid metrics name i.e. iops_seqwrite as defined in above grok-exporter config.yml file. See the sample screenshot below:</li>
 </ol>
 <p><figure>
-  <img src="https://linkpicture.com/q/influx-step-6.png" alt="image"  />
+  <img src="https://i.ibb.co/mvLrnJ2/influx-step-6.png" alt="image"  />
 </figure></p>
 <ol start="7">
 <li>Adjust the ‘Refresh’ with value 1 second or 5 seconds, and there you go seeing the graph in the dashboard with the time-series values of QoS parameters i.e. IOPS, Bandwidth or Latency which is being generated from FIO output on a real-time basis. You might want to adjust the status-interval and runtime parameters of FIO command to observe the time-series values as per your required duration. See the sample screenshot below:</li>
 </ol>
 <p><figure>
-  <img src="https://linkpicture.com/q/influx-step-7.png" alt="image"  />
+  <img src="https://i.ibb.co/1zWsnZM/influx-step-7.png" alt="image"  />
 </figure></p>
 <h2 id="sample-configuration-files">Sample Configuration Files</h2>
 <p>You can find all Grok configuration files and Grafana dashboard json files which will help you get started quickly, in this <a href="https://github.com/kesseract/prometheus-grafana-grok-fio-influxdb" target="_blank">GitHub Repo</a>.</p>
